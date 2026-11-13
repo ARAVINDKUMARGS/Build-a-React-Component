@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aravind Kumar GS | Developer Profile Card</title>
+  
+  <!-- Meta tags for SEO & Social Sharing -->
+  <meta name="description" content="Interactive Developer Profile Card of Aravind Kumar GS - Full Stack Developer & CSE Student. Built for ApnoAI Web Development Internship." />
+  <meta name="author" content="Aravind Kumar GS" />
+
+  <!-- Inline Favicon to eliminate 404 console warnings -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍💻</text></svg>" />
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- React 18 & ReactDOM via CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <!-- Babel Standalone (Compiles JSX directly in browser) -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Tailwind Configuration for Custom Theme & Glassmorphism -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            },
+            accent: {
+              cyan: '#06b6d4',
+              emerald: '#10b981',
+              rose: '#f43f5e',
+              amber: '#f59e0b',
+              violet: '#8b5cf6',
+            }
+          },
+          animation: {
+            'blob-float-1': 'blobFloat1 18s ease-in-out infinite alternate',
+            'blob-float-2': 'blobFloat2 22s ease-in-out infinite alternate',
+            'blob-float-3': 'blobFloat3 26s ease-in-out infinite alternate',
+            'pulse-subtle': 'pulseSubtle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'heart-pop': 'heartPop 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+            'badge-shine': 'badgeShine 4s linear infinite',
+          },
+          keyframes: {
+            blobFloat1: {
+              '0%': { transform: 'translate(0px, 0px) scale(1)' },
+              '50%': { transform: 'translate(60px, -40px) scale(1.15)' },
+              '100%': { transform: 'translate(-30px, 50px) scale(0.95)' },
+            },
+            blobFloat2: {
+              '0%': { transform: 'translate(0px, 0px) scale(1)' },
+              '50%': { transform: 'translate(-70px, 60px) scale(1.12)' },
+              '100%': { transform: 'translate(50px, -30px) scale(0.9)' },
+            },
+            blobFloat3: {
+              '0%': { transform: 'translate(0px, 0px) scale(0.95)' },
+              '50%': { transform: 'translate(40px, 40px) scale(1.1)' },
+              '100%': { transform: 'translate(-50px, -50px) scale(1.05)' },
+            },
+            pulseSubtle: {
+              '0%, 100%': { opacity: '0.85', transform: 'scale(1)' },
+              '50%': { opacity: '1', transform: 'scale(1.03)' },
+            },
+            heartPop: {
+              '0%': { transform: 'scale(1)' },
+              '50%': { transform: 'scale(1.35)' },
+              '100%': { transform: 'scale(1)' },
+            },
+            badgeShine: {
+              '0%': { backgroundPosition: '200% 0' },
+              '100%': { backgroundPosition: '-200% 0' },
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Custom CSS for Glassmorphism, Sheen and Scrollbars -->
+  <style>
+    /* Smooth theme transitions */
+    * {
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    /* Glassmorphism Styles */
+    .glass-card-dark {
+      background: rgba(15, 23, 42, 0.72);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.6), 
+                  0 0 40px -10px rgba(99, 102, 241, 0.18),
+                  inset 0 1px 1px 0 rgba(255, 255, 255, 0.12);
+    }
+
+    .glass-card-light {
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      box-shadow: 0 25px 60px -15px rgba(99, 102, 241, 0.12),
+                  0 10px 30px -10px rgba(0, 0, 0, 0.06),
+                  inset 0 1px 2px 0 rgba(255, 255, 255, 0.9);
+    }
+
+    .glass-subcard-dark {
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .glass-subcard-light {
+      background: rgba(248, 250, 252, 0.8);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+    }
+
+    /* Subtle grid overlay for developer aesthetic */
+    .bg-grid-pattern-dark {
+      background-size: 32px 32px;
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+
+    .bg-grid-pattern-light {
+      background-size: 32px 32px;
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    }
+
+    /* Custom Sheen highlight on card hover */
+    .sheen-effect {
+      position: relative;
+      overflow: hidden;
+    }
+    .sheen-effect::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent 45%,
+        rgba(255, 255, 255, 0.08) 50%,
+        transparent 55%
+      );
+      transform: rotate(25deg) translateY(-100%);
+      transition: transform 0.8s ease-in-out;
+      pointer-events: none;
+    }
+    .sheen-effect:hover::before {
+      transform: rotate(25deg) translateY(100%);
+    }
+
+    /* Subtle custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.25);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(148, 163, 184, 0.4);
+    }
+  </style>
+</head>
+<body class="min-h-screen selection:bg-brand-500 selection:text-white font-sans antialiased overflow-x-hidden">
+  
+  <!-- React Root Element -->
+  <div id="root"></div>
+
+  <!-- React & Babel Application Code -->
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // ==========================================
+    // 1. REUSABLE INLINE SVG ICON LIBRARY
+    // (Keeps code 100% frontend-only and zero-dependency)
+    // ==========================================
+    const Icons = {
+      Github: () => (
+        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+        </svg>
+      ),
+      Linkedin: () => (
+        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+        </svg>
+      ),
+      Globe: () => (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+        </svg>
+      ),
+      Sun: () => (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="5" />
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+        </svg>
+      ),
+      Moon: () => (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      ),
+      Heart: ({ filled }) => (
+        <svg 
+          className={`w-5 h-5 transition-transform duration-300 ${filled ? 'fill-rose-500 stroke-rose-500 scale-110' : 'fill-none stroke-current'}`} 
+          strokeWidth="2" 
+          viewBox="0 0 24 24" 
+          aria-hidden="true"
+        >
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+        </svg>
+      ),
+      Verified: () => (
+        <svg className="w-5 h-5 text-brand-500 fill-brand-500" viewBox="0 0 24 24" aria-label="Verified Developer">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+        </svg>
+      ),
+      Location: () => (
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+          <circle cx="12" cy="10" r="3" />
+        </svg>
+      ),
+      Briefcase: () => (
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+        </svg>
+      ),
+      GraduationCap: () => (
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+          <path d="M6 12v5c3 3 9 3 12 0v-5" />
+        </svg>
+      ),
+      Code: () => (
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <polyline points="16 18 22 12 16 6" />
+          <polyline points="8 6 2 12 8 18" />
+        </svg>
+      ),
+      Sparkles: () => (
+        <svg className="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2L9.5 9.5 2 12l7.5 2.5L12 22l2.5-7.5L22 12l-7.5-2.5L12 2z" />
+        </svg>
+      ),
+      ExternalLink: () => (
+        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+          <polyline points="15 3 21 3 21 9" />
+          <line x1="10" y1="14" x2="21" y2="3" />
+        </svg>
+      ),
+      Copy: () => (
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+        </svg>
+      ),
+      Check: () => (
+        <svg className="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      ),
+    };
+
+    // ==========================================
+    // 2. SKILL PILL COMPONENT WITH ICON/ACCENT
+    // ==========================================
+    function SkillBadge({ name, category, isDark }) {
+      // Color accents based on technology family
+      const colorSchemes = {
+        react: 'border-cyan-500/30 text-cyan-400 bg-cyan-500/10 hover:border-cyan-400',
+        js: 'border-amber-500/30 text-amber-400 bg-amber-500/10 hover:border-amber-400',
+        node: 'border-emerald-500/30 text-emerald-400 bg-emerald-500/10 hover:border-emerald-400',
+        express: 'border-slate-400/30 text-slate-300 bg-slate-500/10 hover:border-slate-300',
+        mongo: 'border-green-500/30 text-green-400 bg-green-500/10 hover:border-green-400',
+        sql: 'border-blue-500/30 text-blue-400 bg-blue-500/10 hover:border-blue-400',
+        java: 'border-orange-500/30 text-orange-400 bg-orange-500/10 hover:border-orange-400',
+        git: 'border-rose-500/30 text-rose-400 bg-rose-500/10 hover:border-rose-400',
+        default: 'border-brand-500/30 text-brand-400 bg-brand-500/10 hover:border-brand-400',
+      };
+
+      const lightColorSchemes = {
+        react: 'border-cyan-600/30 text-cyan-700 bg-cyan-50 hover:bg-cyan-100',
+        js: 'border-amber-600/30 text-amber-700 bg-amber-50 hover:bg-amber-100',
+        node: 'border-emerald-600/30 text-emerald-700 bg-emerald-50 hover:bg-emerald-100',
+        express: 'border-slate-500/30 text-slate-800 bg-slate-100 hover:bg-slate-200',
+        mongo: 'border-green-600/30 text-green-700 bg-green-50 hover:bg-green-100',
+        sql: 'border-blue-600/30 text-blue-700 bg-blue-50 hover:bg-blue-100',
+        java: 'border-orange-600/30 text-orange-700 bg-orange-50 hover:bg-orange-100',
+        git: 'border-rose-600/30 text-rose-700 bg-rose-50 hover:bg-rose-100',
+        default: 'border-brand-600/30 text-brand-700 bg-brand-50 hover:bg-brand-100',
+      };
+
+      const key = name.toLowerCase();
+      let scheme = isDark ? colorSchemes.default : lightColorSchemes.default;
+
+      if (key.includes('react')) scheme = isDark ? colorSchemes.react : lightColorSchemes.react;
+      else if (key.includes('javascript') || key.includes('js')) scheme = isDark ? colorSchemes.js : lightColorSchemes.js;
+      else if (key.includes('node')) scheme = isDark ? colorSchemes.node : lightColorSchemes.node;
+      else if (key.includes('express')) scheme = isDark ? colorSchemes.express : lightColorSchemes.express;
+      else if (key.includes('mongo')) scheme = isDark ? colorSchemes.mongo : lightColorSchemes.mongo;
+      else if (key.includes('mysql') || key.includes('sql')) scheme = isDark ? colorSchemes.sql : lightColorSchemes.sql;
+      else if (key.includes('java')) scheme = isDark ? colorSchemes.java : lightColorSchemes.java;
+      else if (key.includes('git')) scheme = isDark ? colorSchemes.git : lightColorSchemes.git;
+
+      return (
+        <span 
+          className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold tracking-wide border transition-all duration-300 hover:scale-105 cursor-default shadow-sm ${scheme}`}
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-current opacity-70 animate-pulse"></span>
+          {name}
+        </span>
+      );
+    }
+
+    // ==========================================
+    // 3. REUSABLE PROFILE CARD COMPONENT
+    // Receives all developer profile data via Props
+    // ==========================================
+    function ProfileCard({
+      name,
+      role,
+      bio,
+      skills,
+      avatar,
+      socialLinks,
+      statusText = "Open to Opportunities & Internships",
+      location = "Bengaluru, India",
+      education = "B.E. Computer Science & Engineering",
+      initialLikes = 128,
+      theme,
+      onToggleTheme
+    }) {
+      // ----------------------------------------
+      // React State Hooks
+      // ----------------------------------------
+      // State 1: Like Counter & liked status
+      const [likes, setLikes] = useState(initialLikes);
+      const [isLiked, setIsLiked] = useState(false);
+      const [isAnimatingLike, setIsAnimatingLike] = useState(false);
+
+      // State 2: Avatar Image Error Fallback Handler
+      const [imageFailed, setImageFailed] = useState(false);
+
+      // State 3: Copy Portfolio Link Feedback
+      const [copied, setCopied] = useState(false);
+
+      // Handler for Like Button Toggle
+      const handleLikeToggle = () => {
+        setIsAnimatingLike(true);
+        if (isLiked) {
+          setLikes(prev => prev - 1);
+          setIsLiked(false);
+        } else {
+          setLikes(prev => prev + 1);
+          setIsLiked(true);
+        }
+        setTimeout(() => setIsAnimatingLike(false), 450);
+      };
+
+      // Handler for copying portfolio URL
+      const handleCopyPortfolio = () => {
+        navigator.clipboard.writeText(socialLinks.portfolio);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2200);
+      };
+
+      const isDark = theme === 'dark';
+
+      // Fallback Initials Avatar calculation
+      const getInitials = (fullName) => {
+        return fullName
+          .split(' ')
+          .map(part => part[0])
+          .slice(0, 2)
+          .join('')
+          .toUpperCase();
+      };
+
+      return (
+        <div className="relative w-full max-w-[480px] sm:max-w-[520px] transition-all duration-500">
+          
+          {/* Subtle Ambient Card Glow in Background */}
+          <div className={`absolute -inset-1.5 rounded-[2.5rem] filter blur-xl opacity-60 transition duration-700 group-hover:opacity-100 ${
+            isDark 
+              ? 'bg-gradient-to-r from-brand-600/40 via-accent-cyan/30 to-accent-violet/40' 
+              : 'bg-gradient-to-r from-brand-300/50 via-sky-200/50 to-indigo-300/50'
+          }`}></div>
+
+          {/* Main Glassmorphism Card Container */}
+          <div 
+            className={`relative rounded-[2.25rem] overflow-hidden transition-all duration-300 sheen-effect ${
+              isDark ? 'glass-card-dark text-slate-100' : 'glass-card-light text-slate-800'
+            }`}
+          >
+            
+            {/* Top Interactive Bar: ApnoAI Badge & Theme Toggle */}
+            <div className="relative z-10 flex items-center justify-between px-6 pt-5 pb-3">
+              {/* ApnoAI Internship Task Badge */}
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase border border-brand-500/30 bg-brand-500/10 text-brand-400">
+                <Icons.Sparkles />
+                <span>ApnoAI Task 2</span>
+              </div>
+
+              {/* Theme Toggle Button (Light/Dark Mode via useState) */}
+              <button
+                onClick={onToggleTheme}
+                aria-label={`Switch to ${isDark ? 'Light' : 'Dark'} mode`}
+                className={`p-2.5 rounded-2xl border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-500 ${
+                  isDark 
+                    ? 'border-white/10 bg-slate-800/80 text-amber-300 hover:bg-slate-700 hover:text-amber-200 shadow-inner' 
+                    : 'border-slate-200 bg-white/90 text-slate-700 hover:bg-slate-100 hover:text-brand-600 shadow-sm'
+                }`}
+                title="Toggle Dark / Light Theme"
+              >
+                {isDark ? <Icons.Sun /> : <Icons.Moon />}
+              </button>
+            </div>
+
+            {/* Profile Hero Header Banner */}
+            <div className="relative px-6 pt-2 pb-6">
+              
+              {/* Decorative Subtle Header Mesh */}
+              <div className="relative h-28 w-full rounded-2xl overflow-hidden bg-gradient-to-r from-brand-600 via-indigo-600 to-accent-cyan p-4 flex items-end justify-end shadow-md">
+                <div className="absolute inset-0 bg-black/15 backdrop-blur-[1px]"></div>
+                <div className="absolute top-2 right-3 font-mono text-[10px] tracking-widest text-white/70 uppercase">
+                  Frontend • React 18
+                </div>
+              </div>
+
+              {/* Avatar, Status & Core Identity */}
+              <div className="relative -mt-14 flex flex-col sm:flex-row items-center sm:items-end gap-5 px-3">
+                
+                {/* Profile Photo with Safe Fallback */}
+                <div className="relative group/avatar">
+                  <div className={`w-28 h-28 rounded-2xl p-1.5 shadow-2xl transition-transform duration-300 group-hover/avatar:scale-105 ${
+                    isDark ? 'bg-slate-900 border-2 border-brand-500/40' : 'bg-white border-2 border-brand-400/50'
+                  }`}>
+                    {!avatar || imageFailed ? (
+                      /* Sleek Gradient Avatar with Developer Initials */
+                      <div className="w-full h-full rounded-xl bg-gradient-to-br from-brand-600 via-indigo-600 to-accent-cyan flex flex-col items-center justify-center text-white shadow-inner select-none relative overflow-hidden">
+                        <div className="absolute inset-0 bg-black/10"></div>
+                        <span className="relative font-extrabold text-3xl tracking-wider font-mono drop-shadow-sm">
+                          {getInitials(name)}
+                        </span>
+                        <span className="relative text-[9px] font-semibold tracking-widest font-mono text-cyan-200/90 uppercase mt-0.5">
+                          Developer
+                        </span>
+                      </div>
+                    ) : (
+                      /* Main Profile Image (if avatar prop is provided) */
+                      <img
+                        src={avatar}
+                        alt={`${name}'s developer portrait`}
+                        decoding="sync"
+                        onError={() => setImageFailed(true)}
+                        style={{ objectPosition: '50% 20%' }}
+                        className="w-full h-full rounded-xl object-cover shadow-md bg-slate-800"
+                      />
+                    )}
+                  </div>
+
+                  {/* Pulsing "Active & Ready" Status Indicator */}
+                  <span 
+                    className="absolute -bottom-1 -right-1 flex h-5 w-5"
+                    title="Active Developer - Open to Work"
+                  >
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-5 w-5 bg-emerald-500 border-2 border-white dark:border-slate-900"></span>
+                  </span>
+                </div>
+
+                {/* Name, Role & Verification Badge */}
+                <div className="flex-1 text-center sm:text-left mt-2 sm:mt-0">
+                  <div className="flex items-center justify-center sm:justify-start gap-1.5">
+                    <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight font-sans">
+                      {name}
+                    </h1>
+                    <span title="Verified Full Stack Profile">
+                      <Icons.Verified />
+                    </span>
+                  </div>
+                  
+                  <p className="mt-1 text-sm font-semibold bg-gradient-to-r from-brand-500 to-accent-cyan bg-clip-text text-transparent">
+                    {role}
+                  </p>
+
+                  <div className="mt-2 flex flex-wrap items-center justify-center sm:justify-start gap-3 text-xs opacity-75">
+                    <span className="inline-flex items-center gap-1">
+                      <Icons.Location />
+                      {location}
+                    </span>
+                    <span className="inline-flex items-center gap-1">
+                      <Icons.GraduationCap />
+                      CSE Student
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Status Pill: "Available for Internships" */}
+              <div className="mt-4 px-2">
+                <div className={`flex items-center justify-center sm:justify-start gap-2 py-1.5 px-3.5 rounded-xl text-xs font-medium ${
+                  isDark ? 'bg-slate-800/60 text-slate-300 border border-white/5' : 'bg-slate-100/90 text-slate-700 border border-slate-200'
+                }`}>
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span className="truncate">{statusText}</span>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Divider Line */}
+            <div className={`h-px w-full ${isDark ? 'bg-gradient-to-r from-transparent via-white/10 to-transparent' : 'bg-gradient-to-r from-transparent via-slate-200 to-transparent'}`}></div>
+
+            {/* About Me Section */}
+            <div className="px-6 py-5">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 flex items-center gap-1.5 mb-2.5">
+                <Icons.Briefcase />
+                About Developer
+              </h2>
+              <p className={`text-sm leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
+                {bio}
+              </p>
+            </div>
+
+            {/* Skills & Technologies Section */}
+            <div className="px-6 py-4">
+              <div className="flex items-center justify-between mb-3">
+                <h2 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 flex items-center gap-1.5">
+                  <Icons.Code />
+                  Technical Skills & Stack
+                </h2>
+                <span className="text-[11px] font-mono opacity-60">
+                  {skills.length} Technologies
+                </span>
+              </div>
+              
+              {/* Skill Pills Container */}
+              <div className="flex flex-wrap gap-2">
+                {skills.map((skill, index) => (
+                  <SkillBadge 
+                    key={index} 
+                    name={typeof skill === 'string' ? skill : skill.name} 
+                    isDark={isDark} 
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Interactive Stats & Like Button Row */}
+            <div className="px-6 py-4">
+              <div className={`p-4 rounded-2xl flex items-center justify-between gap-4 ${
+                isDark ? 'glass-subcard-dark' : 'glass-subcard-light'
+              }`}>
+                
+                {/* Like Button with Live Counter (Demonstrating useState) */}
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={handleLikeToggle}
+                    aria-label={`Like profile. Currently ${likes} likes.`}
+                    className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl font-medium text-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-rose-400 ${
+                      isLiked 
+                        ? 'bg-rose-500/15 text-rose-500 border border-rose-500/30 shadow-sm' 
+                        : isDark
+                          ? 'bg-slate-800 text-slate-300 border border-white/10 hover:bg-slate-700 hover:text-white'
+                          : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:text-slate-900 shadow-sm'
+                    }`}
+                  >
+                    <span className={isAnimatingLike ? 'animate-heart-pop' : ''}>
+                      <Icons.Heart filled={isLiked} />
+                    </span>
+                    <span className="font-bold font-mono tracking-tight text-sm">
+                      {likes}
+                    </span>
+                    <span className="text-xs opacity-75 font-sans hidden sm:inline">
+                      {isLiked ? 'Liked!' : 'Applaud'}
+                    </span>
+                  </button>
+                </div>
+
+                {/* Quick Quick-Copy / Share Portfolio Button */}
+                <button
+                  onClick={handleCopyPortfolio}
+                  className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-200 ${
+                    copied 
+                      ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30' 
+                      : isDark
+                        ? 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+                        : 'text-slate-500 hover:text-slate-800 hover:bg-slate-200/60'
+                  }`}
+                  title="Copy Portfolio link to clipboard"
+                >
+                  {copied ? <Icons.Check /> : <Icons.Copy />}
+                  <span>{copied ? 'Copied Link!' : 'Share Portfolio'}</span>
+                </button>
+
+              </div>
+            </div>
+
+            {/* Social Links & Call to Action Footer */}
+            <div className={`px-6 py-5 border-t ${
+              isDark ? 'border-white/5 bg-slate-950/40' : 'border-slate-200/80 bg-slate-50/70'
+            }`}>
+              
+              <div className="grid grid-cols-3 gap-3">
+                {/* GitHub Link */}
+                <a
+                  href={socialLinks.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visit Aravind's GitHub Profile"
+                  className={`flex flex-col sm:flex-row items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-xs font-semibold transition-all duration-300 hover:-translate-y-0.5 shadow-sm border ${
+                    isDark 
+                      ? 'bg-slate-900/90 hover:bg-slate-800 text-slate-200 border-white/10 hover:border-white/20' 
+                      : 'bg-white hover:bg-slate-100 text-slate-800 border-slate-200 hover:border-slate-300'
+                  }`}
+                >
+                  <Icons.Github />
+                  <span>GitHub</span>
+                </a>
+
+                {/* LinkedIn Link */}
+                <a
+                  href={socialLinks.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Connect with Aravind on LinkedIn"
+                  className="flex flex-col sm:flex-row items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-xs font-semibold transition-all duration-300 hover:-translate-y-0.5 shadow-sm border border-blue-500/30 bg-blue-600/10 text-blue-500 hover:bg-blue-600 hover:text-white"
+                >
+                  <Icons.Linkedin />
+                  <span>LinkedIn</span>
+                </a>
+
+                {/* Live Portfolio Link */}
+                <a
+                  href={socialLinks.portfolio}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Explore Aravind's Live Portfolio Website"
+                  className="flex flex-col sm:flex-row items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl text-xs font-semibold transition-all duration-300 hover:-translate-y-0.5 shadow-md bg-gradient-to-r from-brand-600 to-brand-500 text-white hover:from-brand-500 hover:to-indigo-500"
+                >
+                  <Icons.Globe />
+                  <span>Portfolio</span>
+                </a>
+              </div>
+
+              {/* Footer Note */}
+              <div className="mt-4 text-center">
+                <p className="text-[11px] opacity-60 font-mono">
+                  Crafted for <span className="font-semibold text-brand-500">ApnoAI</span> Web Dev Internship • 2026
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      );
+    }
+
+    // ==========================================
+    // 4. MAIN APP ROOT COMPONENT
+    // Manages global theme state & supplies props
+    // ==========================================
+    function App() {
+      // Theme State Hook ('dark' | 'light')
+      const [theme, setTheme] = useState('dark');
+
+      // Keep html element class synchronized for Tailwind darkMode: 'class'
+      useEffect(() => {
+        const root = document.documentElement;
+        if (theme === 'dark') {
+          root.classList.add('dark');
+          document.body.classList.remove('bg-slate-50', 'text-slate-900');
+          document.body.classList.add('bg-slate-950', 'text-slate-100');
+        } else {
+          root.classList.remove('dark');
+          document.body.classList.remove('bg-slate-950', 'text-slate-100');
+          document.body.classList.add('bg-slate-50', 'text-slate-900');
+        }
+      }, [theme]);
+
+      const toggleTheme = () => {
+        setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+      };
+
+      // High-resolution optimized portrait of Aravind Kumar GS
+      // (100% self-contained single-file delivery with zero external network dependency)
+      const aravindPortrait = "data:image/jpeg;base64,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1IOtAD1p61GvenqcUASA08VGKevNAD15p4FMFOFADxTqYKdQAtLTfanCgB4NOBqMelOBoAcDTgcUynCgB4OeaQmkB4pCaAGk8U0n0pWppFACUhNIaTNAC0lFJmgBaSiigAooooAXNJRRQAUUUUALS02igBaWm0UALTqaKWgBwpRTadQA4UopopwoAcDTqYKdQAU4UwU8UAOpwpgp4oAeD71IOtRDtTx/WgCVakBqFakU0ASinrTAadQA8U9ajFOFAD6UUynCgBaUU0U4UAOFOFMBpwNADwacDTCcUmfSgB4OaQnikBoJ4oAaTTScUrGmk0ABNITSZptACk0lFJmgApKKKAFpKKKACiiigAooooAWiiigAooooAWlpKKAClptLQAtOptLQAtKKbThQA6nCminUAOFOFMFOFADxTxTAacKAHCnCo1p4oAlWpB0qJakBoAkBpwNRA08GgB4p61GKfQA8GnimCnimMUUopopwFAgFOFNBpwNAh2cUnakJ4o7UAOBpCaTPFITTADTTQTSE80gAmkNITSE80AGabRRQAUlFFABRRRQAUUUUAFFFFABRRRQAUUUUALRRRQAUUUUALRRRQAtOptLQA6lpKdQA6lFNpwNADhTqYKdQAvinGminigBy08VGOtPWgCRakFRrUgNAEgp4pgp4oAeKetRinqfWgB9PFMBp4NACinCmg07NMBQaUmmZoBoAd2oNNJ4ozSAQ9KQnigg0hoAQmkJpTSGgBCaSiigBKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigBaKKKACiiigBaWkooAWnU2loAWnU2lFADqUUlLQAU4U2nCgBwpwqPPFOBNAEinmpFqFTzUgNAEi1ItRqakFAEi08Go1p4oAkFSA1EGqQUwHg08Go1p9ADs04GmU4UgH5pM0mTSZoAXOaKbuozQApNJmkJ4pCaAFJpM00mkzQAhNJSGjNAC0UUUAJRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAtFFFABRRRQAUUUUALS0lFAC0tJRQA4UtNpwoAcKWmiloAWlFIKWgBwqQVFTwTigCRTTwagBqVTzQBKKkFRCng0ASA1IDUQ608GgCYGnhqgBpwNAEwamFqjLU3dSAeWpN1MJppNADi1Jmm5pM0AKTSZpCaM0ANJpKKKAEooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigBaKKKACiiigBaKKKAFpaSigBaKSigBwpaaKdQA4UtNp1ACinCminUAOFSCohTqAJVapAahBp6mgCQGnqaiBp4NAEwamFqi3U1m60gHs1MzTSaTNABmkzSZptADiaTNJRQAUUUUAJRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUALRRRQAUUUUAFFFFAC0UUUAFFFFAC0opKKAHUtJRQA4UoptLQAU4U2nUAOFOFMpaAHU8GmUopgSZpM00UUAFFFFIYUUUUwEooooASiiigBKKKKAEooooASiiigBKKKKAEooooAKKKKAEooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigBaKKKAFooooAKKKKACiiigB1LSUUALRRRQAtOptLQA6lpKdQA4UtNFKKAHinU0UopgPWnCminCgB1FFFACUUUUAFFFFABRRRQAlFFFABRRRQAUUUUAFFFFABRRRQAlFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUALRRRQAUUUUALRRRQAUUUUAFFFFABRRRQAtFFFADqKKKAHU6iigBaUUUUAPFOFFFAAKcKKKAHCiiigBKKKKAEooooASiiigBKKKKACiiigAooooASiiigAooooAKKKKAEooooAKKKKAEooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigBaKKKAFooooAKKKKACiiigBaKKKACiiigBaKKKAH0UUUAPFFFFADhTqKKAHinCiigBwpRRRQAUUUUAJRRRQAlFFFABRRRQAUUUUAFFFFABRRRQAUUUUAJRRRQAUUUUAFFFFACUUUUAFJS0UAFFFFACUUUUAFJS0UAFJS0UAFFFFACUUUUAFJS0UAFFFFACUUUUAFJS0UAFFFFACUUUUAFJS0UAf/Z";
+
+      // Profile Data Object passed as Props to ProfileCard
+      const profileData = {
+        name: "Aravind Kumar GS",
+        role: "Full Stack Developer | CSE Student",
+        bio: "Computer Science Engineering student passionate about building modern web applications and exploring AI-powered technologies.",
+        skills: [
+          "React.js",
+          "JavaScript",
+          "Node.js",
+          "Express.js",
+          "MongoDB",
+          "MySQL",
+          "Java",
+          "Git & GitHub"
+        ],
+        // Profile Avatar: set to null to display clean, modern initials fallback
+        avatar: null,
+        socialLinks: {
+          github: "https://github.com/ARAVINDKUMARGS",
+          linkedin: "https://linkedin.com/in/aravind-kumar-gs-30b3852a3",
+          portfolio: "https://aravindkumar-portfolio.vercel.app/"
+        },
+        statusText: "Open to AI & Full Stack Opportunities",
+        location: "India",
+        initialLikes: 142
+      };
+
+      const isDark = theme === 'dark';
+
+      return (
+        <main className={`relative min-h-screen w-full flex items-center justify-center p-4 sm:p-8 overflow-hidden transition-colors duration-500 ${
+          isDark ? 'bg-slate-950 bg-grid-pattern-dark' : 'bg-slate-100 bg-grid-pattern-light'
+        }`}>
+          
+          {/* Subtle Ambient Animated Orbs for Depth */}
+          <div 
+            aria-hidden="true"
+            className={`absolute top-1/4 -left-20 w-80 h-80 sm:w-96 sm:h-96 rounded-full filter blur-[100px] pointer-events-none opacity-40 animate-blob-float-1 ${
+              isDark ? 'bg-indigo-600/40' : 'bg-indigo-300/60'
+            }`}
+          />
+          <div 
+            aria-hidden="true"
+            className={`absolute bottom-1/4 -right-20 w-80 h-80 sm:w-96 sm:h-96 rounded-full filter blur-[110px] pointer-events-none opacity-35 animate-blob-float-2 ${
+              isDark ? 'bg-cyan-600/35' : 'bg-sky-300/60'
+            }`}
+          />
+          <div 
+            aria-hidden="true"
+            className={`absolute top-2/3 left-1/3 w-64 h-64 rounded-full filter blur-[90px] pointer-events-none opacity-30 animate-blob-float-3 ${
+              isDark ? 'bg-purple-600/30' : 'bg-fuchsia-200/50'
+            }`}
+          />
+
+          {/* Render Reusable ProfileCard with Props */}
+          <ProfileCard
+            name={profileData.name}
+            role={profileData.role}
+            bio={profileData.bio}
+            skills={profileData.skills}
+            avatar={profileData.avatar}
+            socialLinks={profileData.socialLinks}
+            statusText={profileData.statusText}
+            location={profileData.location}
+            initialLikes={profileData.initialLikes}
+            theme={theme}
+            onToggleTheme={toggleTheme}
+          />
+
+        </main>
+      );
+    }
+
+    // Mount the Application to the Root DOM node
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
+
